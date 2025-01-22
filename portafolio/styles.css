@@ -2,32 +2,43 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
+    padding: 80px 0 0; /* Margen superior para el header fijo */
     line-height: 1.6;
     background-color: #f4f4f4;
     color: #333;
 }
 
+/* Header fijo */
 header {
     background: #333;
     color: #fff;
     padding: 20px 0;
     text-align: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: all 0.3s ease;
 }
 
-header h1 {
-    margin: 0;
-    font-size: 2.5rem;
+header.achicado {
+    padding: 10px 0 !important;
+}
+
+header.achicado h1 {
+    font-size: 1.5rem !important;
 }
 
 nav ul {
     list-style: none;
     padding: 0;
     margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 nav ul li {
-    display: inline;
     margin: 0 15px;
 }
 
@@ -37,6 +48,7 @@ nav ul li a {
     font-weight: bold;
 }
 
+/* Secciones */
 section {
     padding: 20px;
     margin: 20px auto;
@@ -44,14 +56,6 @@ section {
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-section.visible {
-    opacity: 1;
-    transform: translateY(0);
 }
 
 h2 {
@@ -81,14 +85,15 @@ h2 {
 
 .video-item iframe {
     width: 100%;
-    height: 200px;
+    height: auto;
+    aspect-ratio: 16/9; /* Relación de aspecto para videos horizontales */
     border: none;
     border-radius: 8px;
 }
 
 /* Ajustes para videos verticales (Reels) */
 .video-item.vertical iframe {
-    height: 400px; /* Altura mayor para videos verticales */
+    aspect-ratio: 9/16; /* Relación de aspecto para videos verticales */
 }
 
 /* Botones de redes */
@@ -130,4 +135,46 @@ footer {
     text-align: center;
     padding: 20px 0;
     width: 100%;
+}
+
+/* Media Queries para diseño responsive */
+
+/* Tablets (pantallas de 768px o menos) */
+@media (max-width: 768px) {
+    .video-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablets */
+    }
+
+    header h1 {
+        font-size: 2rem; /* Reduce el tamaño del título */
+    }
+
+    nav ul li {
+        margin: 0 10px; /* Reduce el espacio entre elementos del menú */
+    }
+}
+
+/* Móviles (pantallas de 480px o menos) */
+@media (max-width: 480px) {
+    .video-grid {
+        grid-template-columns: 1fr; /* 1 columna en móviles */
+    }
+
+    header h1 {
+        font-size: 1.5rem; /* Reduce aún más el tamaño del título */
+    }
+
+    nav ul {
+        flex-direction: column; /* Menú en columna para móviles */
+        align-items: center;
+    }
+
+    nav ul li {
+        margin: 5px 0; /* Reduce el espacio entre elementos del menú */
+    }
+
+    .redes-botones {
+        flex-direction: column; /* Botones en columna para móviles */
+        gap: 10px;
+    }
 }
